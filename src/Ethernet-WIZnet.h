@@ -45,9 +45,9 @@
 // can really help with UDP protocols like Artnet.  In theory larger
 // buffers should allow faster TCP over high-latency links, but this
 // does not always seem to work in practice (maybe Wiznet bugs?)
-//#define ETHERNET_LARGE_BUFFERS
+#define ETHERNET_LARGE_BUFFERS
 
-//#define USE_SERIAL_DEBUG_PRINT
+#define USE_SERIAL_DEBUG_PRINT
 
 #ifdef USE_SERIAL_DEBUG_PRINT
 #define PRINTLINE_DEF(var)  \
@@ -145,6 +145,7 @@ class EthernetUDP;
 class EthernetClient;
 class EthernetServer;
 class DhcpClass;
+class WIZnetClass;
 
 class EthernetClass {
 private:
@@ -183,6 +184,7 @@ public:
 	friend class EthernetClient;
 	friend class EthernetServer;
 	friend class EthernetUDP;
+        friend class WIZnetClass;
 private:
 	// Opens a socket(TCP or UDP or IP_RAW mode)
 	static uint8_t socketBegin(uint8_t protocol, uint16_t port);
@@ -221,8 +223,9 @@ private:
 
 extern EthernetClass Ethernet;
 
-
+#ifndef UDP_TX_PACKET_MAX_SIZE
 #define UDP_TX_PACKET_MAX_SIZE 24
+#endif
 
 class EthernetUDP : public UDP {
 private:

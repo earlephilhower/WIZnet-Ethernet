@@ -19,8 +19,8 @@
  */
 
 #include <Arduino.h>
-#include "Ethernet.h"
-#include "utility/w5100.h"
+#include "./Ethernet-WIZnet.h"
+#include "./utility/w5100.h"
 
 #if ARDUINO >= 156 && !defined(ARDUINO_ARCH_PIC32)
 extern void yield(void);
@@ -102,7 +102,7 @@ closemakesocket:
 	W5100.execCmdSn(s, Sock_CLOSE);
 makesocket:
 	//Serial.printf("W5000socket %d\n", s);
-	EthernetServer::server_port[s] = 0;
+//	EthernetServer::server_port[s] = 0;
 	delayMicroseconds(250); // TODO: is this needed??
 	W5100.writeSnMR(s, protocol);
 	W5100.writeSnIR(s, 0xFF);
@@ -166,7 +166,7 @@ closemakesocket:
 	W5100.execCmdSn(s, Sock_CLOSE);
 makesocket:
 	//Serial.printf("W5000socket %d\n", s);
-	EthernetServer::server_port[s] = 0;
+//	EthernetServer::server_port[s] = 0;
 	delayMicroseconds(250); // TODO: is this needed??
 	W5100.writeSnMR(s, protocol);
 	W5100.writeSnIR(s, 0xFF);
